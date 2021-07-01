@@ -1,5 +1,6 @@
-package com.cursoplatzi.javatest.util;
+package com.cursoplatzi.javatest;
 
+import com.cursoplatzi.javatest.util.PasswordUtil;
 import org.junit.Test;
 
 import static com.cursoplatzi.javatest.util.PasswordUtil.SecurityLevel.*;

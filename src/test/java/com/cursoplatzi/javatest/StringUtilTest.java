@@ -1,5 +1,6 @@
-package com.cursoplatzi.javatest.util;
+package com.cursoplatzi.javatest;
 
+import com.cursoplatzi.javatest.util.StringUtil;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -8,7 +9,7 @@ public class StringUtilTest {
 
     @Test
     public void repeat_string_once(){
-        assertEquals("hola",StringUtil.repeact("hola",1));
+        assertEquals("hola", StringUtil.repeact("hola",1));
     }
 
     @Test
