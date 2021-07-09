@@ -4,6 +4,7 @@ import com.cursoplatzi.javatest.movies.model.Genre;
 import com.cursoplatzi.javatest.movies.model.Movie;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+
 import java.util.Collection;
 
 public class MovieRepositoryJdbc implements MovieRepository {
@@ -16,8 +17,8 @@ public class MovieRepositoryJdbc implements MovieRepository {
 
     @Override
     public Movie findById(long id) {
-
-        return null;
+        Object[] args = {id};
+        return jdbcTemplate.queryForObject("SELECT * FROM movies WHERE id = ?", args, movieMapper);
     }
 
     @Override
@@ -27,7 +28,9 @@ public class MovieRepositoryJdbc implements MovieRepository {
 
     @Override
     public void saveOrUpdate(Movie movie) {
-
+        jdbcTemplate.update("INSERT INTO movies (name, minutes, genre) VALUES (?,?,?)"
+                , movie.getName(), movie.getMinutes(), movie.getGenre().toString()
+        );
     }
 
     private static RowMapper<Movie> movieMapper = (resultSet, i) -> new Movie(resultSet.getInt("id"),
