@@ -40,24 +40,29 @@ public class MovieRepositoryIntegrationTest {
     public void load_all_movies() throws SQLException {
         Collection<Movie> movies = movieRepositoryJdbc.findAll();
         assertThat(movies, CoreMatchers.is(Arrays.asList(
-                new Movie(1, "Dark Knight", 152, Genre.ACTION),
-                new Movie(2, "Memento", 113, Genre.THRILLER),
-                new Movie(3, "Matrix", 136, Genre.ACTION)
+                new Movie(1, "Dark Knight", 152, Genre.ACTION, "Nelson"),
+                new Movie(2, "Memento", 113, Genre.THRILLER, "Cristian"),
+                new Movie(3, "Matrix", 136, Genre.ACTION, "Sebas")
         )));
     }
 
     @Test
     public void load_movie_by_id() {
         Movie movieId = movieRepositoryJdbc.findById(2);
-        assertThat(movieId, CoreMatchers.is(new Movie(2, "Memento", 113, Genre.THRILLER)));
+        assertThat(movieId, CoreMatchers.is(new Movie(2, "Memento", 113, Genre.THRILLER, "Nelson")));
     }
 
     @Test
     public void insert_a_movie() {
 
-        movieRepositoryJdbc.saveOrUpdate(new Movie("Super 8", 112, Genre.THRILLER));
+        movieRepositoryJdbc.saveOrUpdate(new Movie("Super 8", 112, Genre.THRILLER, "Juan"));
         Movie movieFromBd = movieRepositoryJdbc.findById(4);
-        assertThat(movieFromBd, CoreMatchers.is(new Movie(4, "Super 8", 112, Genre.THRILLER)));
+        assertThat(movieFromBd, CoreMatchers.is(new Movie(4, "Super 8", 112, Genre.THRILLER, "Juan")));
+    }
+
+    @Test
+    public void load_movies_containing_string() {
+
     }
 
     @After

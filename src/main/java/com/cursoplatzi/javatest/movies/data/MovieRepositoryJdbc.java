@@ -23,7 +23,7 @@ public class MovieRepositoryJdbc implements MovieRepository {
 
     @Override
     public Collection<Movie> findAll() {
-        return jdbcTemplate.query("select * from movies", movieMapper);
+        return jdbcTemplate.query("SELECT * FROM movies", movieMapper);
     }
 
     @Override
@@ -36,5 +36,6 @@ public class MovieRepositoryJdbc implements MovieRepository {
     private static RowMapper<Movie> movieMapper = (resultSet, i) -> new Movie(resultSet.getInt("id"),
             resultSet.getString("name"),
             resultSet.getInt("minutes"),
-            Genre.valueOf(resultSet.getString("genre")));
+            Genre.valueOf(resultSet.getString("genre")),
+            resultSet.getString("director"));
 }
